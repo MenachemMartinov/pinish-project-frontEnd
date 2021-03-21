@@ -4,7 +4,13 @@ import Joi from "joi-browser";
 import cardServices from "../common/services/cardsServices";
 import { Link } from "react-router-dom";
 
+/***
+ * "editCard" component
+ */
 class EditCard extends Form {
+  /***
+   * the state of the component
+   */
   state = {
     formData: {
       bizName: "",
@@ -19,6 +25,9 @@ class EditCard extends Form {
     errors: {},
   };
 
+  /**
+   * the schema is a object that is parameters getting validate function
+   */
   schema = {
     bizName: Joi.string().required(),
     bizCategory: Joi.string().required(),
@@ -30,6 +39,10 @@ class EditCard extends Form {
     bizImageWeek: Joi.string(),
   };
 
+  /**
+   * the function that "handelSubmit" run if no errors
+   * the function will run the "newCard" function from the "cardServices" end catch the errors
+   */
   doSubmit = async () => {
     const { formData } = this.state;
     console.log(formData);
@@ -43,6 +56,9 @@ class EditCard extends Form {
     }
   };
 
+  /**
+   * the render jsx of the component
+   */
   render() {
     return (
       <div className="container">
@@ -74,7 +90,10 @@ class EditCard extends Form {
             </div>
           </form>
           <div className="col-12">
-            <Link className="btn btn-primary btn-md mt-4" to={`/card/${this.props.match.params.id}/edit-img`}>
+            <Link
+              className="btn btn-primary btn-md mt-4"
+              to={`/card/${this.props.match.params.id}/edit-img`}
+            >
               העלאת תמונות חדשות
             </Link>
           </div>

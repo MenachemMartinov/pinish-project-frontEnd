@@ -19,7 +19,6 @@ import CategoryId from "./components/categoryId";
 import {
   ManagerDashboard,
   NavBar,
-  UserDashboard,
   BusinessDashboard,
 } from "./components/dashboard";
 import EditCard from "./components/editCard";
@@ -29,7 +28,13 @@ import NewCategory from "./components/newCategory";
 import categoryService from "./common/services/categoryService";
 import MyFavorite from "./components/myFavorite";
 
+/***
+ * "app" component
+ */
 class App extends Component {
+  /***
+   * the state of the component
+   */
   state = {
     user: "",
     cards: {},
@@ -38,30 +43,42 @@ class App extends Component {
     exactCategory: "",
   };
 
+  /***
+   * on component started this function will run
+   * this function check if the user is logged end send request to server to get the cards and the categories
+   * after this the state will be updated
+   */
   async componentDidMount() {
     const user = userService.getCurrentUser();
     this.setState({ user });
     const categories = await categoryService.getCategories();
-    const cards = await cardServices.getMyCards();
+    const cards = await cardServices.getCards();
     this.setState({ cards, categories });
   }
 
+
+  /***
+   * the render of jsx
+   */
   render() {
     const { user, categories, cards } = this.state;
     return (
       <>
+      {/** this is the header of te app */}
         <header className="container-fluid p-0">
           <NavBar
             user={user}
             categories={categories}
             cards={cards}
           />
+          {/** check if the user type of manager or business */}
           {user?.manager && <ManagerDashboard />}
           {user?.business && <BusinessDashboard />}
         </header>
         <main className="container-fluid min-vh-100 bg-dark text-white p-0 pt-4">
           <ToastContainer />
 
+            {/** all routing in the function */}
           <Switch>
             <Route
               exact
@@ -117,6 +134,7 @@ class App extends Component {
             <Redirect to="/" />
           </Switch>
         </main>
+        {/** the footer of the app */}
         <footer className="container-fluid bg-dark p-3"></footer>
       </>
     );

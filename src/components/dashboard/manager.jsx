@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
 
+
+/***
+ * the "ManagerDashboard" component 
+ * the component will return a seceded dashboard with the 2 button 
+ * 1 to go create a new business card.
+ * 2 to create a new category
+ */
 const ManagerDashboard = () => {
   return (
     <div className="container-fluid bg-success p-0 m-0">

@@ -6,7 +6,14 @@ import { imgUrl } from "../common/config.json";
 
 import "./card.css";
 
+/***
+ * cardId component
+ */
 class CardId extends Component {
+  /***
+   * the state of the "cardId"
+   */
+
   state = {
     card: {
       _id: "",
@@ -19,16 +26,27 @@ class CardId extends Component {
       bizName: "",
       bizPhone: "",
     },
-    rode: false,
+    favoriteIsExist: false,
   };
+
+  /***
+   * the favorites function check if the card is favorite
+   * if is true the favorites state changes to false
+   * if is false the favorites state changes to true
+   */
   favorites = async () => {
     const exist = await favoritesService.ifExistFavorites(this.state.card._id);
     if (exist.length > 0) {
-      this.setState({ rode: true });
+      this.setState({ favoriteIsExist: true });
     } else {
-      this.setState({ rode: false });
+      this.setState({ favoriteIsExist: false });
     }
   };
+
+  /***
+   * the function run after started the component
+   * the function run the function to get the exact card by id end the function run the "favorites" function
+   */
   componentDidMount = async () => {
     const data = await cardServices.getCard(this.props.match.params.id);
     this.setState({
@@ -36,6 +54,10 @@ class CardId extends Component {
     });
     this.favorites();
   };
+
+  /***
+   * render the jsx
+   */
   render() {
     const {
       _id,
@@ -55,7 +77,9 @@ class CardId extends Component {
               <div className="row">
                 <div className="col-12 col-md-6 col-lg-4">
                   <img
-                    src={`${imgUrl}/${bizImageDefault[bizImageDefault.length - 1]}`}
+                    src={`${imgUrl}/${
+                      bizImageDefault[bizImageDefault.length - 1]
+                    }`}
                     className="card-img inline cardImg"
                     alt={`bizImageDefault of:${bizName} of: ${bizCategory}`}
                   />
@@ -97,6 +121,7 @@ class CardId extends Component {
                   </p>
                 </div>
                 <div className="col-12 "></div>
+                {/** if this card created by the user wes logged*/}
                 {user_id === this.props.id && (
                   <>
                     <div className="col-12 "></div>
@@ -119,20 +144,22 @@ class CardId extends Component {
                     </div>
                   </>
                 )}
-                {this.props.id && !this.state.rode && (
+                {/** if this card is not favorite*/}
+                {this.props.id && !this.state.favoriteIsExist && (
                   <button
                     className="btn btn-success btn-block m-3"
                     onClick={async () => {
                       const res = await favoritesService.newFavorites(_id);
                       if (res) {
-                        this.setState({ rode: true });
+                        this.setState({ favoriteIsExist: true });
                       }
                     }}
                   >
                     הוספה למעודפים
                   </button>
                 )}
-                {this.props.id && this.state.rode && (
+                {/** if this card is favorite*/}
+                {this.props.id && this.state.favoriteIsExist && (
                   <button
                     className="btn btn-success btn-block m-3"
                     onClick={async () => {

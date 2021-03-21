@@ -4,7 +4,14 @@ import { Form } from "../../common/forms";
 import UserService from "../../common/services/userService";
 import "../form.css";
 
+/**
+ * class component for login
+ */
 class LogIn extends Form {
+  /**
+   * the state of the component
+   * the state is like local DB
+   */
   state = {
     formData: {
       email: "",
@@ -13,11 +20,18 @@ class LogIn extends Form {
     errors: {},
   };
 
+  /**
+   * the schema is a object that is parameters getting validate function
+   */
   schema = {
     email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().min(6).label("Password"),
   };
 
+  /**
+   * the function that "handelSubmit" run if no errors 
+   * the function will run the "login" function from the "userService" end catch the errors
+   */
   doSubmit = async () => {
     const { email, password } = this.state.formData;
 
@@ -31,6 +45,9 @@ class LogIn extends Form {
     }
   };
 
+  /**
+   * the render jsx of the component
+   */
   render() {
     return (
       <div className="container">

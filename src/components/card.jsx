@@ -5,19 +5,26 @@ import "./card.css";
 import { imgUrl } from "../common/config.json";
 import favoritesService from "../common/services/favoritesService";
 
+/***
+ * the card component getting 2 parameters
+ * 1 the card object
+ * 2 the user id to check if the card has been created by the same user
+ */
 const Card = ({
-  card: {
-    _id,
-    bizAddress,
-    bizCategory,
-    bizImageDefault,
-    bizName,
-    bizPhone,
-    user_id,
-  },
+  card: { _id, bizCategory, bizImageDefault, bizName, bizPhone, user_id },
   id,
 }) => {
+  /***
+   * the state for favorites
+   * this started with false
+   */
   const [favoritesExist, setFavoritesExist] = useState(false);
+
+  /***
+   * the favorites function check if the card is favorite
+   * if is true the favorites state changes to false
+   * if is false the favorites state changes to true
+   */
   const favorites = async () => {
     const exist = await favoritesService.ifExistFavorites(_id);
     if (exist.length > 0) {
@@ -26,8 +33,14 @@ const Card = ({
       setFavoritesExist(false);
     }
   };
+  /***
+   * run the favorites function
+   */
   favorites();
 
+  /***
+   * render the jsx
+   */
   return (
     <div className="col-12 m-0 mt-4 p-0  ">
       <div className="container">
@@ -66,6 +79,7 @@ const Card = ({
                   למידע נוסף לחץ כאן
                 </Link>
               </div>
+              {/** if this card created by the user wes logged*/}
               {user_id === id && (
                 <>
                   <div className="col-12 "></div>
@@ -88,6 +102,7 @@ const Card = ({
                   </div>
                 </>
               )}
+              {/** if this card is not favorite*/}
               {id && !favoritesExist && (
                 <button
                   className="btn btn-success btn-block m-3"
@@ -101,6 +116,7 @@ const Card = ({
                   הוספה למעודפים
                 </button>
               )}
+              {/** if this card is favorite*/}
               {id && favoritesExist && (
                 <button
                   className="btn btn-success btn-block m-3"

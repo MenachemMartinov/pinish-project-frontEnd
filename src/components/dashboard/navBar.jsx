@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = ({ user, categories, cards,onClick1 }) => {
+/***
+ * the "navBar" component getting 3 parameters
+ * 1 the user info and
+ * 2 all categories
+ * 3 the cards to can search
+ */
+const NavBar = ({ user, categories, cards }) => {
+  /***
+   * the state for the "filterCards" function
+   * is started with null
+   */
   const [state, setState] = useState(null);
-  const filterCards = (name) => {
+  /***
+   * the function getting 1 parameter "Search"
+   * the function search end filter the all cards 
+   */
+  const filterCards = (Search) => {
     if (cards) {
-      if (name.length > 0) {
-        let filterOfSearch = name.split(" ");
+      if (Search.length > 0) {
+        let filterOfSearch = Search.split(" ");
 
         const cardsFind = cards.filter((card) =>
           filterOfSearch.some((item) =>
@@ -20,10 +34,10 @@ const NavBar = ({ user, categories, cards,onClick1 }) => {
     }
   };
 
-  if (onClick1) {
-    setState(onClick1);
-  }
-
+  
+  /**
+   * the render jsx of the component
+   */
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
@@ -69,7 +83,7 @@ const NavBar = ({ user, categories, cards,onClick1 }) => {
                         </Link>
                       );
                     })}
-
+                  {/** if user is not logged*/}
                   {!user && (
                     <>
                       <Link className="dropdown-item" to="/login">
@@ -86,6 +100,7 @@ const NavBar = ({ user, categories, cards,onClick1 }) => {
                       </Link>
                     </>
                   )}
+                  {/** if user is logged*/}
                   {user && (
                     <>
                       <Link className="dropdown-item" to="/logout">

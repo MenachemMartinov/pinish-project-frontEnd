@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-// import { imgUrl } from "../common/config.json";
 
 import "./category.css";
 
+/***
+ * the category component getting 1 parameter
+ * 1 all Categories
+ */
 const Category = ({ allCategories }) => {
   return (
     <div className="row m-0 p-0 pt-4 pb-3">
+      {/** check if all categories is exist*/}
       {allCategories?.length > 0 &&
         allCategories.map((category) => {
           return (

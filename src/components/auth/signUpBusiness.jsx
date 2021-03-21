@@ -1,14 +1,20 @@
 import React from "react";
 import { Form } from "../../common/forms";
 import Joi from "joi-browser";
-import { apiUrl } from "../../common/config.json";
 import { toast } from "react-toastify";
-import http from "../../common/services/httpService";
 import userService from "../../common/services/userService";
 import "../form.css";
 
-
+/***
+ * the subscribe component
+ * this component is subscribe for business
+ * the component will typeof class
+ */
 class SignUpBusiness extends Form {
+  /**
+   * the state of the component
+   * the state is like local DB
+   */
   state = {
     formData: {
       password: "",
@@ -18,12 +24,20 @@ class SignUpBusiness extends Form {
     errors: {},
   };
 
+  /**
+   * the schema is a object that is parameters getting validate function
+   */
   schema = {
     email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().min(6).label("Password"),
     name: Joi.string().required().min(2).label("Name"),
   };
 
+  /**
+   * the function that "handelSubmit" run if no errors
+   * the function will run the "signUp" function from the "userService" end catch the errors
+   * end the reload the page to "/login"
+   */
   async doSubmit() {
     const body = { ...this.state.formData, business: true };
 
@@ -38,6 +52,9 @@ class SignUpBusiness extends Form {
     }
   }
 
+  /**
+   * the render jsx of the component
+   */
   render() {
     return (
       <div className="container">

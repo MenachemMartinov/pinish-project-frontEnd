@@ -4,7 +4,13 @@ import { Form } from "../common/forms";
 import categoryService from "../common/services/categoryService";
 import "./category.css";
 
+/***
+ * "newCategory" component
+ */
 class NewCategory extends Form {
+  /***
+   * the state of the component
+   */
   state = {
     formData: {
       categoryName: "",
@@ -13,11 +19,18 @@ class NewCategory extends Form {
     errors: {},
   };
 
+  /**
+   * the schema is a object that is parameters getting validate function
+   */
   schema = {
     categoryName: Joi.string(),
     image: Joi.string(),
   };
 
+  /**
+   * the function that "handelSubmit" run if no errors
+   * the function will run the "newCard" function from the "cardServices" end catch the errors
+   */
   doSubmit = async () => {
     const { formData } = this.state;
     try {
@@ -30,6 +43,9 @@ class NewCategory extends Form {
     }
   };
 
+  /**
+   * the render jsx of the component
+   */
   render() {
     return (
       <div className="container">

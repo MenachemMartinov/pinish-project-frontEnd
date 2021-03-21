@@ -3,7 +3,13 @@ import { Form } from "../common/forms";
 import Joi from "joi-browser";
 import cardServices from "../common/services/cardsServices";
 
+/***
+ * "newCard" component
+ */
 class NewCard extends Form {
+  /***
+   * the state of the component
+   */
   state = {
     formData: {
       bizName: "",
@@ -18,6 +24,9 @@ class NewCard extends Form {
     errors: {},
   };
 
+  /**
+   * the schema is a object that is parameters getting validate function
+   */
   schema = {
     bizName: Joi.string().required(),
     bizCategory: Joi.string().required(),
@@ -29,6 +38,10 @@ class NewCard extends Form {
     bizImageWeek: Joi.array(),
   };
 
+  /**
+   * the function that "handelSubmit" run if no errors 
+   * the function will run the "newCard" function from the "cardServices" end catch the errors
+   */
   doSubmit = async () => {
     const { formData } = this.state;
     const data1 = {
@@ -47,6 +60,9 @@ class NewCard extends Form {
     }
   };
 
+  /**
+   * the render jsx of the component
+   */
   render() {
     return (
       <div className="container">

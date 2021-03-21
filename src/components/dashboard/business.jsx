@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 
+/***
+ * the "BusinessDashboard" component 
+ * the component will return a seceded dashboard with the a button to go create a new business card.
+ */
 const BusinessDashboard = () => {
   return (
     <div className="container-fluid bg-success p-0 m-0">
