@@ -29,7 +29,7 @@ const Category = ({ allCategories }) => {
                   <div className="col-12">
                     <Link
                       to={`/category/${category.categoryName}`}
-                      className="btn btn-primary btn-block btn-lg"
+                      className="btn btn-dark btn-block btn-lg"
                     >
                       {category.categoryName}
                     </Link>

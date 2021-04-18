@@ -15,7 +15,7 @@ const NavBar = ({ user, categories, cards }) => {
   const [state, setState] = useState(null);
   /***
    * the function getting 1 parameter "Search"
-   * the function search end filter the all cards 
+   * the function search end filter the all cards
    */
   const filterCards = (Search) => {
     if (cards) {
@@ -34,16 +34,15 @@ const NavBar = ({ user, categories, cards }) => {
     }
   };
 
-  
   /**
    * the render jsx of the component
    */
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-1">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            אינדקס העסקים ביתר עילית
+            אינדקס העסקים בביתר עילית
           </Link>
           <button
             className="navbar-toggler"
@@ -92,12 +91,12 @@ const NavBar = ({ user, categories, cards }) => {
                       <Link className="dropdown-item" to="/sign-up-business">
                         הרשמה לבעלי עסקים
                       </Link>
-                      <Link className="dropdown-item" to="/sign-up-user">
+                      {/* <Link className="dropdown-item" to="/sign-up-user">
                         הרשמה ללקוחות
                       </Link>
                       <Link className="dropdown-item" to="/sign-up-manager">
                         הרשמה למנהלים
-                      </Link>
+                      </Link> */}
                     </>
                   )}
                   {/** if user is logged*/}
@@ -122,7 +121,6 @@ const NavBar = ({ user, categories, cards }) => {
                 className="form-control"
                 placeholder="חיפוש לפי שם העסק"
                 onChange={({ target: { value } }) => filterCards(value)}
-                
               />
             </form>
             {state?.length > 0 && (

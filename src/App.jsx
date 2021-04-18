@@ -27,6 +27,7 @@ import NewCard from "./components/newCard";
 import NewCategory from "./components/newCategory";
 import categoryService from "./common/services/categoryService";
 import MyFavorite from "./components/myFavorite";
+import EditCategory from "./components/editCategory";
 
 /***
  * "app" component
@@ -70,7 +71,8 @@ class App extends Component {
           {user?.manager && <ManagerDashboard />}
           {user?.business && <BusinessDashboard />}
         </header>
-        <main className="container-fluid min-vh-100 bg-dark text-white p-0 pt-4 mt-5">
+        <main className="container-fluid min-vh-100 bg-2 text-white p-0">
+          <div className="p-tb-10">
           <ToastContainer />
 
           {/** all routing in the function */}
@@ -89,13 +91,21 @@ class App extends Component {
             <ProtectedRoute path="/new-category" component={NewCategory} />
             <Route
               path="/category/:id"
+              exact
               render={(props) => (
                 <CategoryId
                   {...props}
                   id={user?._id}
                   allCards={cards}
                   allCategories={categories}
+                  manager={user?.manager}
                 />
+              )}
+            />
+            <Route
+              path="/category/:id/edit"
+              render={(props) => (
+                <EditCategory {...props} manager={user?.manager} />
               )}
             />
             <Route
@@ -128,9 +138,10 @@ class App extends Component {
             <Route path="/sign-up-manager" component={SignUpManager} />
             <Redirect to="/" />
           </Switch>
+          </div>
         </main>
         {/** the footer of the app */}
-        <footer className="container-fluid bg-dark p-3"></footer>
+        <footer className="container-fluid bg-dark p-tb-5"></footer>
       </>
     );
   }

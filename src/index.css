@@ -1,0 +1,29 @@
+.p-tb-5 {
+  padding-top: 5% !important;
+  padding-bottom: 5% !important;
+}
+.p-tb-10 {
+  padding-top: 10% !important;
+  padding-bottom: 10% !important;
+}
+.bg-1 {
+  background-color: #00618d;
+}
+.bg-2 {
+  background-color: #767679;
+}
+
+.bg-3 {
+  background-color: #fff;
+}
+
+.btn-1 {
+  background-color: #00618d;
+}
+.btn-2 {
+  background-color: #767679;
+}
+
+.btn-3 {
+  background-color: #fff;
+}

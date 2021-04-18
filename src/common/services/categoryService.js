@@ -38,7 +38,7 @@ export const updateCategory = async (id, formData) => {
  * the function send to the server request to delete category
  */
 export const deleteCategories = async (id) => {
-  const { data } = await http.get(`${apiUrl}/categories/${id}`);
+  const { data } = await http.delete(`${apiUrl}/categories/${id}`);
   return data;
 };
 
