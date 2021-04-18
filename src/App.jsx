@@ -56,7 +56,6 @@ class App extends Component {
     this.setState({ cards, categories });
   }
 
-
   /***
    * the render of jsx
    */
@@ -64,21 +63,17 @@ class App extends Component {
     const { user, categories, cards } = this.state;
     return (
       <>
-      {/** this is the header of te app */}
-        <header className="container-fluid p-0">
-          <NavBar
-            user={user}
-            categories={categories}
-            cards={cards}
-          />
+        {/** this is the header of te app */}
+        <header className="container-fluid p-0 fixed-top">
+          <NavBar user={user} categories={categories} cards={cards} />
           {/** check if the user type of manager or business */}
           {user?.manager && <ManagerDashboard />}
           {user?.business && <BusinessDashboard />}
         </header>
-        <main className="container-fluid min-vh-100 bg-dark text-white p-0 pt-4">
+        <main className="container-fluid min-vh-100 bg-dark text-white p-0 pt-4 mt-5">
           <ToastContainer />
 
-            {/** all routing in the function */}
+          {/** all routing in the function */}
           <Switch>
             <Route
               exact

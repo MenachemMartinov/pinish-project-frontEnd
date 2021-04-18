@@ -8,6 +8,7 @@ import TextTara from "./textTara";
 import Select from "./select";
 import cardServices from "../services/cardsServices";
 import { toast } from "react-toastify";
+import { NewImgUpload } from "../services/filesServies";
 
 class Form extends Component {
   /**
@@ -88,22 +89,26 @@ class Form extends Component {
    * the function is following on cangues on the form files field
    */
   handelChangeFile = async ({ target: { files, name } }) => {
-    if (!files[0]) {
+    console.log(files);
+    if (!files.length) {
+      console.log("1");
       toast("לא בחרת קובץ ");
       return;
     }
     const { formData } = this.state;
+    console.log("2");
 
     const sendFile = new FormData();
     sendFile.append("file", files[0], files[0].name);
     try {
-      const value = await cardServices.uploadCardImages(sendFile);
+      const value = await NewImgUpload(sendFile);
+      console.log(value);
       // validate form
       const updateFormData = { ...formData };
-      updateFormData[name].push(value?.path);
+      updateFormData[name].push(value?.data?.path);
       // update state
       this.setState({ formData: updateFormData });
-      if (value?.path) {
+      if (value?.data?.path) {
         this.setState({ rode: true });
         toast.success("התמונה עלתה");
       }
@@ -132,7 +137,7 @@ class Form extends Component {
         error={errors && errors[name]}
         name={name}
         label={label}
-        rest={rest}
+        {...rest}
       />
     );
   };
@@ -154,7 +159,7 @@ class Form extends Component {
         error={errors && errors[name]}
         name={name}
         label={label}
-        rest={rest}
+        {...rest}
       />
     );
   };
